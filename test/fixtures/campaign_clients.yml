@@ -2,8 +2,8 @@
 
 one:
   campaign: one
-  client: 
+  client: one
 
 two:
   campaign: two
-  client: 
+  client: two
