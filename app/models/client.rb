@@ -2,6 +2,10 @@ class Client < ApplicationRecord
   include Fae::BaseModelConcern
 
   has_many :campaign_clients
+  
+  has_one :address, dependent: :destroy
+  accepts_nested_attributes_for :address, allow_destroy: true
+
   has_many :campaigns, through: :campaign_clients, dependent: :destroy
 
   validates :phone, presence: true
