@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191126141354) do
+ActiveRecord::Schema.define(version: 20191126180137) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,23 @@ ActiveRecord::Schema.define(version: 20191126141354) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_addresses_on_client_id", using: :btree
+  end
+
+  create_table "book_services", force: :cascade do |t|
+    t.integer  "book_id"
+    t.integer  "service_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_services_on_book_id", using: :btree
+    t.index ["service_id"], name: "index_book_services_on_service_id", using: :btree
+  end
+
+  create_table "books", force: :cascade do |t|
+    t.text     "description"
+    t.integer  "client_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["client_id"], name: "index_books_on_client_id", using: :btree
   end
 
   create_table "campaign_clients", force: :cascade do |t|
@@ -267,6 +284,9 @@ ActiveRecord::Schema.define(version: 20191126141354) do
   end
 
   add_foreign_key "addresses", "clients"
+  add_foreign_key "book_services", "books"
+  add_foreign_key "book_services", "services"
+  add_foreign_key "books", "clients"
   add_foreign_key "campaign_clients", "campaigns"
   add_foreign_key "campaign_clients", "clients"
   add_foreign_key "products", "suppliers"
