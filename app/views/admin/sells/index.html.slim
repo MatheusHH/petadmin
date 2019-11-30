@@ -5,7 +5,7 @@ main.content
     thead
       tr
         th Id
-        th Date
+        th Discount
         th Client
         th Total
         th.-action-wide Modified
@@ -16,7 +16,7 @@ main.content
         - @items.each do |item|
           tr id=fae_sort_id(item)
             td = link_to item.fae_display_field, edit_admin_sell_path(item)
-            td = item.date
+            td = item.discount.kind
             td = item.client.name
             td = item.total
             td = fae_date_format item.updated_at
